@@ -1,8 +1,9 @@
-FROM ubuntu:latest
+FROM ubuntu:20.04
 LABEL maintainer="dringot@click2buy.com"
 
+RUN rm -rf /var/lib/apt/lists/*
 RUN apt-get update
-RUN apt-get install curl -y
+RUN apt-get install curl -y 
 
 # Install Node.js
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash
@@ -11,9 +12,6 @@ RUN node -v
 RUN npm -v
 RUN npm i -g nodemon
 RUN nodemon -v
-
-# Cleanup
-RUN apt-get update && apt-get upgrade -y && apt-get autoremove -y
 
 #ADD file
 ADD Javascript/ /home/Javascript/

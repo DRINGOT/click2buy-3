@@ -13,10 +13,12 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser())
 
 app.get('/', function (req, res) {
+  console.log('Home Page')
   res.sendFile(path.join(__dirname + '../../views/index.html'))
 })
 
 app.get('/login', function (req, res) {
+  console.log('Login Page')
   res.sendFile(path.join(__dirname + '../../views/login.html'))
 })
 
@@ -37,9 +39,10 @@ app.post('/auth', async function (req, res) {
     const token = response.data.token
 
     res.cookie('token', `${token}`)
-    // res.cookie('token', 'toto')
+    console.log('Sign up Successful')
     res.sendFile(path.join(__dirname + '../../views/signup_success.html'))
   } catch (err) {
+    console.log('Wrong Login')
     return res.status(401).sendFile(path.join(__dirname + '../../views/error401.html'))
   }
 })
@@ -52,6 +55,7 @@ app.get('/data', async function (req, res) {
   })
 })
 
+/* eslint-disable */
 app.use('*', function (req, res) {
   res.sendFile(path.join(__dirname + '/background.js'))
 })

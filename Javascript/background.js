@@ -1,4 +1,5 @@
 window.onload = function () {
+  /* eslint-disable */
   particlesJS('particles-js', {
     particles: {
       number: {
