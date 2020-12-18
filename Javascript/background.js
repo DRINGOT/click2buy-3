@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
   particlesJS("particles-js", {
     "particles": {
       "number": {

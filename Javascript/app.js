@@ -2,9 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
 const axios = require('axios')
-const cookieParser = require ('cookie-parser')
+const cookieParser = require('cookie-parser')
 const app = express()
-app.set('view engine','ejs')
+app.set('view engine', 'ejs')
 app.use(bodyParser.json())
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({
@@ -33,27 +33,27 @@ app.post('/auth', async function (req, res) {
         "password": password
     }
 
-    try{
+    try {
         const response = await axios.post(`${process.env.RAILS_BASE_URL}/auth`, body)
         const token = response.data.token
 
         res.cookie('token', `${token}`)
         // res.cookie('token', 'toto')
         res.sendFile(path.join(__dirname + '../../views/signup_success.html'))
-    } catch(err) {
+    } catch (err) {
         return res.status(401).sendFile(path.join(__dirname + '../../views/error401.html'))
     }
 })
 
-app.get("/data",async function (req, res) {
+app.get("/data", async function (req, res) {
     const token = req.cookies.token
-    const response = await axios.get(`${process.env.RAILS_BASE_URL}/data?token=${token}` )
-   res.render('data',{
-       "hello" : response.data
-   })
+    const response = await axios.get(`${process.env.RAILS_BASE_URL}/data?token=${token}`)
+    res.render('data', {
+        "hello": response.data
+    })
 })
 
-app.use('*', function(req, res) {
+app.use('*', function (req, res) {
     res.sendFile(path.join(__dirname + '/background.js'));
 });
 
@@ -62,5 +62,3 @@ const port = process.env.PORT || 3000
 app.listen(port, function () {
     console.log(`Server Has Started at http://localhost:${port} !`)
 })
-
-
