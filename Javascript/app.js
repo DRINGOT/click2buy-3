@@ -35,13 +35,16 @@ app.post('/auth', async function (req, res) {
   }
 
   try {
+    console.log(process.env.RAILS_BASE_URL)
     const response = await axios.post(`${process.env.RAILS_BASE_URL}/auth`, body)
     const token = response.data.token
+    console.log(`token --> ${token}`)
 
     res.cookie('token', `${token}`)
     console.log('Sign up Successful')
     res.sendFile(path.join(__dirname + '../../views/signup_success.html'))
   } catch (err) {
+    console.log(err)
     console.log('Wrong Login')
     return res.status(401).sendFile(path.join(__dirname + '../../views/error401.html'))
   }
