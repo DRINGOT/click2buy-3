@@ -31,4 +31,4 @@ jobs:
         uses: docker/build-push-action@v2.2.1
         with:
           push: true
-          tags: docker-registry.click2buy.com/formation_nodejs:latest
+          tags: phz234yd.gra7.container-registry.ovh.net/click2buy/formation_nodejs:latest
