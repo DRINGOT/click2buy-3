@@ -23,6 +23,6 @@ RUN npm install
 
 EXPOSE 3000
 
-CMD [ "nodemon", "Javascript/app.js" ]
+CMD [ "node", "Javascript/app.js" ]
 
 
