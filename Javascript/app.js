@@ -27,15 +27,16 @@ app.get('/signup_success', function (req, res) {
 })
 
 app.post('/auth', async function (req, res) {
-  const name = req.body.name
+  const name = req.body.username
   const password = req.body.password
+
   const body = {
     name: name,
     password: password
   }
 
   try {
-    console.log(process.env.RAILS_BASE_URL)
+    console.log(`RAILS BASE URL : ${process.env.RAILS_BASE_URL}`)
     const response = await axios.post(`${process.env.RAILS_BASE_URL}/auth`, body)
     const token = response.data.token
     console.log(`token --> ${token}`)
@@ -44,8 +45,8 @@ app.post('/auth', async function (req, res) {
     console.log('Sign up Successful')
     res.sendFile(path.join(__dirname + '../../views/signup_success.html'))
   } catch (err) {
-    console.log(err)
     console.log('Wrong Login')
+    console.log(err)
     return res.status(401).sendFile(path.join(__dirname + '../../views/error401.html'))
   }
 })
